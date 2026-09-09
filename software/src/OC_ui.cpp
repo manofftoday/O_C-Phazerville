@@ -298,7 +298,7 @@ UiMode Ui::Splashscreen(bool &reset_settings, uint8_t phase) {
         graphics.setPrintPos(28, 23);
         graphics.print(" Welcome to");
         graphics.setPrintPos(28, 33);
-        graphics.print("Phazerville!");
+        graphics.print("HorusEyes!");
       }
       //graphics.print(OC::Strings::RELEASE_NAME);
 

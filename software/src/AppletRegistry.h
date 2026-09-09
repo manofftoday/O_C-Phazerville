@@ -47,7 +47,9 @@ struct Registry {
         std::array<FactoryFn, Size> arr{
           (+[]() -> T* {
             void* block = (OC::CORE::FreeRam() > OC::CORE::RAM2_HEADROOM) ? calloc(1, Declarations::size) : nullptr;
+#ifdef __IMXRT1062__
             if (!block) block = extmem_calloc(1, Declarations::size);
+#endif
             if (block) return new (block) typename Declarations::type();
             return nullptr;
            }) ...

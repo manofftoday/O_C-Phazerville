@@ -226,13 +226,7 @@ static void SaveGlobalSettings() {
     global_settings.q_engines[i].root_note = HS::q_engine[i].root_note;
   }
   for (int i = 0; i < MIDIMAP_MAX; ++i) {
-    global_settings.midi_maps[i].channel       = HS::frame.MIDIState.mapping[i].channel      ;
-    global_settings.midi_maps[i].dac_polyvoice = HS::frame.MIDIState.mapping[i].dac_polyvoice;
-    global_settings.midi_maps[i].function      = HS::frame.MIDIState.mapping[i].function     ;
-    global_settings.midi_maps[i].function_cc   = HS::frame.MIDIState.mapping[i].function_cc  ;
-    global_settings.midi_maps[i].transpose     = HS::frame.MIDIState.mapping[i].transpose    ;
-    global_settings.midi_maps[i].range_low     = HS::frame.MIDIState.mapping[i].range_low    ;
-    global_settings.midi_maps[i].range_high    = HS::frame.MIDIState.mapping[i].range_high   ;
+    global_settings.midi_maps[i] = HS::frame.MIDIState.mapping[i].GetSettings();
   }
 
   global_settings_storage.Save(global_settings);
@@ -389,6 +383,12 @@ void AppSwitcher::Init(bool reset_settings) {
   global_settings.current_app_id = DEFAULT_APP_ID;
   memset(HS::user_turing_machines, 0, sizeof(HS::user_turing_machines));
 
+#ifndef __IMXRT1062__
+  // Load the EEPROM-backed settings before checking validity below.
+  global_settings_storage.Load(global_settings);
+#endif
+
+#ifdef __IMXRT1062__
   uint64_t data = 0;
   // check metadata for validity
   if (PhzConfig::getValue(METADATA_KEY, data)) {
@@ -400,6 +400,7 @@ void AppSwitcher::Init(bool reset_settings) {
     //global_settings.DAC_scaling = Unpack(data, PackLocation{32, 32});
     //OC::DAC::restore_scaling(global_settings.DAC_scaling);
   }
+#endif
 
   if (reset_settings || !global_settings.valid) {
     if (ui.ConfirmReset()) {
@@ -561,13 +562,7 @@ void AppSwitcher::Init(bool reset_settings) {
         HS::q_engine[i].Reconfig();
       }
       for (int i = 0; i < MIDIMAP_MAX; ++i) {
-        HS::frame.MIDIState.mapping[i].channel       = global_settings.midi_maps[i].channel      ;
-        HS::frame.MIDIState.mapping[i].dac_polyvoice = global_settings.midi_maps[i].dac_polyvoice;
-        HS::frame.MIDIState.mapping[i].function      = global_settings.midi_maps[i].function     ;
-        HS::frame.MIDIState.mapping[i].function_cc   = global_settings.midi_maps[i].function_cc  ;
-        HS::frame.MIDIState.mapping[i].transpose     = global_settings.midi_maps[i].transpose    ;
-        HS::frame.MIDIState.mapping[i].range_low     = global_settings.midi_maps[i].range_low    ;
-        HS::frame.MIDIState.mapping[i].range_high    = global_settings.midi_maps[i].range_high   ;
+        HS::frame.MIDIState.mapping[i].SetSettings(global_settings.midi_maps[i]);
       }
       HS::frame.MIDIState.UpdateMidiChannelFilter();
       HS::frame.MIDIState.UpdateMaxPolyphony();

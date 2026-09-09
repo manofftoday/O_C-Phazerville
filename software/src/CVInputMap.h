@@ -154,6 +154,10 @@ public:
     source = TYPE_INTERNAL | (idx & 0x1f);
   }
 
+  void SetSource(uint8_t value) {
+    source = value;
+  }
+
   const char * InputName() const {
     static char in_label[] = "C 1";
 
@@ -323,6 +327,9 @@ public:
   void SetClockSource(uint8_t idx) {
     CONSTRAIN(idx, 0, channel_count(TYPE_INTERNAL) - 1);
     source = TYPE_INTERNAL | (idx & 0x1f);
+  }
+  void SetSource(uint8_t value) {
+    source = value;
   }
 
   void Reset(bool hard = false) {

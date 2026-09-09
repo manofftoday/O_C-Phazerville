@@ -677,6 +677,10 @@ float ADC::Read_ID_Voltage() { return 0; }
 
 #endif // __IMXRT1062__
 
+#ifndef __IMXRT1062__
+float ADC::Read_ID_Voltage() { return 0; }
+#endif
+
 
 /*static*/ void ADC::CalibratePitch(int32_t c2, int32_t c4) {
   // This is the method used by the Mutable Instruments calibration and

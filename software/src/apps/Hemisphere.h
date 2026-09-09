@@ -99,8 +99,8 @@ public:
       uint16_t cvmap = 0;
       uint16_t trigmap = 0;
       for (size_t i = 0; i < 4; ++i) {
-        trigmap |= (uint16_t(HS::trigmap[i].source + 1) & 0x0F) << (i*4);
-        cvmap |= (uint16_t(HS::cvmap[i].source + 1) & 0x0F) << (i*4);
+        trigmap |= (uint16_t(HS::trigmap[i].index() + 1) & 0x0F) << (i*4);
+        cvmap |= (uint16_t(HS::cvmap[i].index() + 1) & 0x0F) << (i*4);
       }
 
       bool changed = (uint16_t(values_[HEMISPHERE_TRIGMAP]) != trigmap)
@@ -115,11 +115,11 @@ public:
       for (size_t i = 0; i < 4; ++i) {
         int val = (uint16_t(values_[HEMISPHERE_TRIGMAP]) >> (i*4)) & 0x0F;
         if (val != 0)
-          HS::trigmap[i].source = val - 1;
+          HS::trigmap[i].SetSource(val - 1);
 
         val = (uint16_t(values_[HEMISPHERE_CVMAP]) >> (i*4)) & 0x0F;
         if (val != 0)
-          HS::cvmap[i].source = val - 1;
+          HS::cvmap[i].SetSource(val - 1);
       }
     }
 

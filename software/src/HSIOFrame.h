@@ -184,6 +184,12 @@ struct MIDIMapping : protected MIDIMapSettings {
   const uint8_t get_high() const {
     return range_high;
   }
+  MIDIMapSettings GetSettings() const {
+    return static_cast<const MIDIMapSettings&>(*this);
+  }
+  void SetSettings(const MIDIMapSettings &settings) {
+    static_cast<MIDIMapSettings&>(*this) = settings;
+  }
   const bool enabled() const {
     return get_type() != NONE;
   }

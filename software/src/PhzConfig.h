@@ -37,4 +37,22 @@ namespace PhzConfig {
   void eraseFiles(FS &fs = myfs);
 
 }
+#else
+
+namespace PhzConfig {
+  using KEY = uint16_t;
+  using VALUE = uint64_t;
+
+  inline void Init() {}
+  inline bool load_config(const char* = nullptr) { return true; }
+  inline bool save_config(const char* = nullptr) { return true; }
+  inline void clear_config() {}
+  inline void setValue(KEY, VALUE) {}
+  inline bool getValue(KEY, VALUE &) { return false; }
+  inline void deleteKey(KEY) {}
+  inline void setData(KEY, VALUE) {}
+  inline bool getData(KEY, VALUE &) { return false; }
+  inline void deleteData(KEY) {}
+}
+
 #endif

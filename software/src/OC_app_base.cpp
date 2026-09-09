@@ -125,6 +125,8 @@ UiMode AppBase::DispatchEvent(const UI::Event &event)
         break;
 
       case UI::EVENT_BUTTON_LONG_PRESS:
+        if (CONTROL_BUTTON_L == event.control)
+          return UI_MODE_SCREENSAVER;
       default:
         HandleButtonEvent(event);
         z_button_hold = event.mask & CONTROL_BUTTON_Z;
