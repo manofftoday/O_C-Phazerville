@@ -166,7 +166,7 @@ void AppCVRecorder::GetIOConfig(OC::IOConfig &ioconfig) const {
   ioconfig.digital_inputs[3].set("Start record");
   for (int channel = 0; channel < kTrackCount; ++channel) {
     ioconfig.cv[channel].set_printf("Record %d", channel + 1);
-    ioconfig.outputs[channel].set_printf("Play %d", channel + 1);
+    ioconfig.outputs[channel].set_printf(OC::OUTPUT_MODE_PITCH, "Play %d", channel + 1);
   }
 }
 
@@ -214,6 +214,12 @@ void AppCVRecorder::DrawMenu() const {
 
 void AppCVRecorder::DrawScreensaver() const {
   DrawMenu();
+}
+
+void AppCVRecorder::Loop() {
+}
+
+void AppCVRecorder::DrawDebugInfo() const {
 }
 
 };
