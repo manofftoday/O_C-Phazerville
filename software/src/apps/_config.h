@@ -32,6 +32,9 @@ namespace menu = OC::menu;
 #ifdef ENABLE_APP_REFERENCES
 #include "References.h"
 #endif
+#ifdef ENABLE_APP_CVRECORDER
+#include "CVRecorder.h"
+#endif
 // #include "Passencore.h"
 #include "CaptainMIDI.h"
 #include "TheDarkestTimeline.h"
@@ -127,6 +130,9 @@ static AppContainer<void // this space intentionally left blank
 #endif
 #ifdef ENABLE_APP_REFERENCES
   , AppReferences
+#endif
+#ifdef ENABLE_APP_CVRECORDER
+  , AppCVRecorder
 #endif
 #ifdef ENABLE_APP_PONG
   , AppPong

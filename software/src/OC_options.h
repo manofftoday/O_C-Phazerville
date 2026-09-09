@@ -66,6 +66,7 @@
 
 // #define ENABLE_APP_CALIBR8OR
 // #define ENABLE_APP_SCENES
+// #define ENABLE_APP_CVRECORDER
 // #define ENABLE_APP_ENIGMA
 // #define ENABLE_APP_MIDI
 // #define ENABLE_APP_PONG

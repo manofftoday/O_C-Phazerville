@@ -37,6 +37,7 @@ Not everything can fit at once on Teensy 3.2 hardware, but you can use the [defa
  * [Waveform Editor](Waveform-Editor) - Edit and save vector waveforms (for [LFOs](VectorLFO), [envelopes](VectorEG), [one-shots](VectorMod), and [phase scrubbing](VectorMorph))
  * [Viznutcracker, sweet!](Viznutcracker-sweet) - Quad Bytebeat generator
  * [Backup / Restore](Backup-and-Restore) - Transfer app and calibration data as SysEx
+ * [CV Recorder 4](CV-Recorder-4) - Four-channel clocked CV recorder
  * [Setup / About](Setup-About) - Check your version, change encoder directions, adjust display/DAC/ADC, screen off time
 
 
